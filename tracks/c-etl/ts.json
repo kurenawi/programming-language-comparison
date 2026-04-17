@@ -1,0 +1,52 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "title": "write docs",
+      "status": "todo",
+      "priority": "high",
+      "estimate": 3
+    },
+    {
+      "id": 2,
+      "title": "ship api",
+      "status": "in_progress",
+      "priority": "medium",
+      "estimate": 5
+    },
+    {
+      "id": 3,
+      "title": "fix bug",
+      "status": "done",
+      "priority": "low",
+      "estimate": 2
+    },
+    {
+      "id": 4,
+      "title": "review pr",
+      "status": "todo",
+      "priority": "medium",
+      "estimate": 1
+    },
+    {
+      "id": 5,
+      "title": "clean data",
+      "status": "in_progress",
+      "priority": "high",
+      "estimate": 8
+    }
+  ],
+  "summary": {
+    "total_tasks": 5,
+    "status_counts": {
+      "todo": 2,
+      "in_progress": 2,
+      "done": 1
+    },
+    "points_by_priority": {
+      "high": 11,
+      "medium": 6,
+      "low": 2
+    }
+  }
+}

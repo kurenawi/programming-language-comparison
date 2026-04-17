@@ -1,0 +1,6 @@
+{"id":1,"title":"Fix auth bug","status":"todo","priority":"high","estimate":3}
+{"id":2,"title":"Write docs","status":"done","priority":"medium","estimate":2}
+{"id":3,"title":"Add retry","status":"in_progress","priority":"high","estimate":5}
+{"id":4,"title":"Refactor cache","status":"todo","priority":"low","estimate":8}
+{"id":5,"title":"Polish UI","status":"done","priority":"low","estimate":1}
+{"id":6,"title":"Improve logs","status":"in_progress","priority":"medium","estimate":2}

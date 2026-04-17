@@ -1,0 +1,9 @@
+[
+  {"id":"job-fast-1","kind":"fast","duration_ms":40,"max_retries":0},
+  {"id":"job-slow-1","kind":"slow","duration_ms":220,"max_retries":0},
+  {"id":"job-flaky-1","kind":"flaky","duration_ms":90,"max_retries":2},
+  {"id":"job-timeout-1","kind":"timeout","duration_ms":900,"max_retries":1},
+  {"id":"job-fatal-1","kind":"fatal","duration_ms":70,"max_retries":2},
+  {"id":"job-fast-2","kind":"fast","duration_ms":30,"max_retries":0},
+  {"id":"job-flaky-2","kind":"flaky","duration_ms":120,"max_retries":1}
+]
