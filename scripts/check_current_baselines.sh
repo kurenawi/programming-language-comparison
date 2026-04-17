@@ -74,13 +74,13 @@ INNERPY
 echo "ok"
 
 echo
-printf '[4/5] R3 worker pool (Go) ... '
-R3_OUT="$TMP_DIR/r3.json"
-go run tracks/r3-worker-pool/main.go tracks/r3-worker-pool/jobs.json 4 250 > "$R3_OUT"
-python3 - <<'INNERPY' "$R3_OUT"
+printf '[4/5] R3 worker pool (Go + Elixir) ... '
+R3_GO_OUT="$TMP_DIR/r3_go.json"
+go run tracks/r3-worker-pool/main.go tracks/r3-worker-pool/jobs.json 4 250 > "$R3_GO_OUT"
+R3_EX_OUT="$TMP_DIR/r3_ex.json"
+elixir tracks/r3-worker-pool/main.exs tracks/r3-worker-pool/jobs.json 4 250 > "$R3_EX_OUT"
+python3 - <<'INNERPY' "$R3_GO_OUT" "$R3_EX_OUT"
 import json, sys
-with open(sys.argv[1]) as f:
-    data = json.load(f)
 expected = {
     "total_jobs": 7,
     "succeeded": 5,
@@ -91,8 +91,11 @@ expected = {
     "worker_count": 4,
     "timeout_ms": 250,
 }
-for k, v in expected.items():
-    assert data.get(k) == v, (k, data.get(k), v)
+for path in sys.argv[1:]:
+    with open(path) as f:
+        data = json.load(f)
+    for k, v in expected.items():
+        assert data.get(k) == v, (path, k, data.get(k), v)
 INNERPY
 echo "ok"
 
@@ -127,4 +130,5 @@ echo "ok"
 echo
 echo "All checked baselines passed."
 echo "TypeScript HTTP, CLI, and ETL tracks are now compiled from repo-local dependencies during verification."
+echo "R3 now verifies both the original Go baseline and the new Elixir implementation against the same jobs input."
 echo "R5 now verifies both the original C++ baseline and the new Rust implementation against the same binary input."
