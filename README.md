@@ -27,7 +27,6 @@ This repository packages the concrete comparison artifacts that were previously 
 
 - Rust / Elixir / Zig have not been run yet in the same tracks in this environment.
 - The final decision guide still needs the remaining languages and track-by-track adoption / rejection conditions.
-- TypeScript verification for the CLI / ETL tracks is not folded into the unified baseline script yet.
 
 ## Reproducing
 
@@ -58,4 +57,4 @@ clang++ -std=c++20 -O2 -Wall -Wextra -pedantic tracks/r5-binary-parser/main.cpp 
 /tmp/r5_cpp tracks/r5-binary-parser/frames.bin
 ```
 
-For the HTTP tracks, the repo can now install TypeScript dependencies locally with `npm ci` inside each track directory during verification.
+For the TypeScript tracks, the repo now installs dependencies locally with `npm ci` and compiles with repo-local `tsc` during verification.
