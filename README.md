@@ -23,6 +23,7 @@ This repository packages the concrete comparison artifacts that were previously 
 - A short situation-based interim guide now lives in `docs/current-decision-guide.md`.
 - A track-by-track adoption / fallback / rejection matrix now lives in `docs/track-adoption-rejection-matrix.md`.
 - Current "verified now vs still blocked" repo status lives in `docs/current-baseline-status.md`.
+- Toolchain readiness and the exact next comparison slice per blocked language live in `docs/toolchain-readiness-and-next-steps.md`.
 
 ## Gaps still open
 
@@ -41,6 +42,12 @@ HTTP-only verification:
 
 ```bash
 python3 scripts/check_http_tracks.py
+```
+
+Toolchain/readiness notes for blocked languages:
+
+```bash
+sed -n '1,220p' docs/toolchain-readiness-and-next-steps.md
 ```
 
 Examples:
