@@ -50,6 +50,12 @@ Toolchain/readiness notes for blocked languages:
 sed -n '1,220p' docs/toolchain-readiness-and-next-steps.md
 ```
 
+Executable readiness check:
+
+```bash
+./scripts/check_toolchain_readiness.sh
+```
+
 Examples:
 
 ```bash

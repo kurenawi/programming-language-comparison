@@ -90,6 +90,20 @@ Expected output contract:
 - same summary fields as the C++ baseline
 - implementation notes focused on buffer handling, allocator/control surface, and parser readability
 
+## Executable readiness check
+
+Run this to get the current runnable/blocked snapshot as JSON:
+
+```bash
+./scripts/check_toolchain_readiness.sh
+```
+
+It reports:
+
+- what is available now
+- what is blocked now
+- the first track to use once Rust / Elixir / Zig become runnable
+
 ## Why this doc matters
 
 The repo already has good comparison artifacts, but the next step can still stall if the environment question is rediscovered from scratch every run.
