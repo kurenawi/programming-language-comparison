@@ -117,7 +117,7 @@ else:
 notes["run_now_without_new_toolchains"] = [
     "R1/R2/R4 hardening on Python, TypeScript, and Go",
     "R3 baseline iteration in Go",
-    "R5 baseline iteration in C++",
+    "R5 comparison work across C++ and Rust",
     "repo-level verification and decision-guide hardening",
 ]
 

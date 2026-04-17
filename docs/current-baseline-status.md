@@ -25,10 +25,10 @@
   - Go
 - `r5-binary-parser`
   - C++
+  - Rust
 
 ## Present but not auto-checked yet
 
-- Rust tracks, blocked by missing toolchain in the current environment
 - Elixir tracks, blocked by runtime/version setup in the current environment
 - Zig tracks, blocked by missing toolchain in the current environment
 - MoonBit tracks, blocked by missing toolchain in the current environment
@@ -49,4 +49,4 @@ That command now covers:
 - HTTP optional-field compatibility
 - ETL
 - worker-pool baseline
-- binary-parser baseline
+- binary-parser baseline (C++ + Rust)

@@ -42,9 +42,10 @@ It is meant to answer a more practical question than raw language comparison not
 
 | Choice | Language | Why it currently earns this slot | Avoid first when |
 | -- | -- | -- | -- |
-| First pick for the current environment | C++ | The baseline parser already exists, toolchain is available, and low-level parsing responsibilities are visible and testable | Memory safety guarantees are the first requirement rather than control and availability |
-| Planned strong comparison targets | Rust, Zig | These are the real intended comparison targets for safe/control-heavy low-level work once toolchains exist | Toolchains are missing, so current selection would be aspirational rather than verified |
-| Not enough evidence yet | Go, Python, TypeScript, Elixir, MoonBit | They have not been implemented on this binary-parser track in this repo | The task is not actually low-level or buffer-centric |
+| First pick for the current environment | Rust | Rust now runs on the same fixed binary-parser track as C++, matches the C++ output, and brings memory-safety guarantees to the exact low-level slice we wanted to test first | You explicitly need C++ interop first, or you need to stay inside an existing C++ codebase with no Rust adoption budget |
+| Strong fallback | C++ | The original baseline is still explicit, controllable, and fully available in this environment | Memory safety and extension confidence matter more than ecosystem inertia or existing C++ familiarity |
+| Planned strong comparison target | Zig | Zig is still one of the intended low-level comparison targets, but it remains blocked by missing toolchain | Toolchain is missing, so current selection would still be aspirational rather than verified |
+| Not enough evidence yet | Go, Python, TypeScript, Elixir, MoonBit, C | They have not been implemented on this binary-parser track in this repo | The task is not actually low-level or buffer-centric |
 
 ## What this matrix is safe to use for right now
 
@@ -52,8 +53,8 @@ Use it for:
 
 - choosing between Python, TypeScript, and Go for the currently implemented tracks
 - deciding whether to start an operational baseline in Go
-- deciding whether low-level comparison work can move forward now with C++ while Rust/Zig are blocked
-- explaining why the next highest-value additions are Rust on R5 and Elixir on R3
+- deciding whether low-level comparison work should start with Rust or fall back to C++ in the current environment
+- explaining why the next highest-value additions are Elixir on R3 and Zig on R5
 
 Do not use it yet for:
 
@@ -63,7 +64,7 @@ Do not use it yet for:
 
 ## Immediate upgrade path for this matrix
 
-1. Add Rust to `tracks/r5-binary-parser`
-2. Add Elixir to `tracks/r3-worker-pool`
-3. Add Rust to `tracks/r3-worker-pool` or an adjacent R2 slice
+1. Add Elixir to `tracks/r3-worker-pool`
+2. Add Rust to `tracks/r3-worker-pool` or an adjacent R2 slice
+3. Add Zig to `tracks/r5-binary-parser`
 4. Replace the remaining "planned comparison target" rows with evidence-backed rows from implemented tracks

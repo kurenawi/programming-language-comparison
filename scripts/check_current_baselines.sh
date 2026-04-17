@@ -97,25 +97,34 @@ INNERPY
 echo "ok"
 
 echo
-printf '[5/5] R5 binary parser (C++) ... '
+printf '[5/5] R5 binary parser (C++ + Rust) ... '
 R5_BIN="$TMP_DIR/r5_cpp"
 clang++ -std=c++20 -O2 -Wall -Wextra -pedantic tracks/r5-binary-parser/main.cpp -o "$R5_BIN"
-R5_OUT="$TMP_DIR/r5.json"
-"$R5_BIN" tracks/r5-binary-parser/frames.bin > "$R5_OUT"
-python3 - <<'INNERPY' "$R5_OUT"
+R5_CPP_OUT="$TMP_DIR/r5_cpp.json"
+"$R5_BIN" tracks/r5-binary-parser/frames.bin > "$R5_CPP_OUT"
+if [[ -f "$HOME/.cargo/env" ]]; then
+  # shellcheck disable=SC1090
+  . "$HOME/.cargo/env"
+fi
+R5_RUST_OUT="$TMP_DIR/r5_rust.json"
+cargo run --quiet --manifest-path tracks/r5-binary-parser/Cargo.toml -- tracks/r5-binary-parser/frames.bin > "$R5_RUST_OUT"
+python3 - <<'INNERPY' "$R5_CPP_OUT" "$R5_RUST_OUT"
 import json, sys
-with open(sys.argv[1]) as f:
-    data = json.load(f)
-assert data == {
+expected = {
     "total_records": 5,
     "total_value": 527,
     "flagged_records": 2,
     "type_counts": {"type_1": 2, "type_2": 2, "type_3": 1},
     "type_value_sums": {"type_1": 420, "type_2": 100, "type_3": 7},
-}, data
+}
+for path in sys.argv[1:]:
+    with open(path) as f:
+        data = json.load(f)
+    assert data == expected, (path, data)
 INNERPY
 echo "ok"
 
 echo
 echo "All checked baselines passed."
 echo "TypeScript HTTP, CLI, and ETL tracks are now compiled from repo-local dependencies during verification."
+echo "R5 now verifies both the original C++ baseline and the new Rust implementation against the same binary input."

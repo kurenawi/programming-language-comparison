@@ -13,10 +13,13 @@ Currently available in this environment:
 
 Currently blocked:
 
-- Rust: `rustc` / `cargo` not found on PATH
 - Elixir: shim exists, but no active version is configured via mise
 - Zig: not found on PATH
 - MoonBit: not found on PATH
+
+Recently unblocked and already used:
+
+- Rust: available via `mise use -g rust@stable`, and now exercised on `tracks/r5-binary-parser`
 
 ### Concrete observed blocker for Elixir
 
@@ -41,30 +44,24 @@ This means the blocker is not conceptual. It is specifically runtime/version set
 
 ### Highest-value blocked additions
 
-1. Rust on `tracks/r5-binary-parser`
-   - Why first: R5 is already fixed to a concrete binary parsing task, so Rust can be compared against an existing C++ baseline with minimal ambiguity.
-2. Elixir on `tracks/r3-worker-pool`
+1. Elixir on `tracks/r3-worker-pool`
    - Why second: R3 already has stable input/output expectations, and Elixir is one of the main planned comparison targets for concurrency / failure isolation.
 3. Zig on `tracks/r5-binary-parser`
    - Why third: same fixed input/output shape as Rust, but lower immediate value than Rust for the current decision backlog.
 
 ## Exact next slice after each unblock
 
-### If Rust becomes available
+### Rust is now available
 
-First target:
+Completed first target:
 
 - `tracks/r5-binary-parser`
 
-Expected output contract:
+What is now true:
 
-- same `frames.bin`
-- same summary fields as the C++ baseline
-- implementation notes focused on parsing clarity, memory-safety ergonomics, and extension cost
-
-Only after that:
-
-- consider Rust on `tracks/r3-worker-pool` or a later R2 slice
+- Rust produces the same summary fields as the C++ baseline on the same `frames.bin`
+- the repo can verify the Rust and C++ outputs together in `./scripts/check_current_baselines.sh`
+- the next meaningful Rust slices are no longer unblock work, but propagation into another track such as `tracks/r3-worker-pool` or a later R2 slice
 
 ### If Elixir becomes available
 
@@ -112,6 +109,6 @@ This document turns the remaining work into:
 
 - what is runnable now
 - what is blocked now
-- what the first meaningful task is once each blocker is removed
+- what the first meaningful task is once each blocker is removed or completed
 
 That should keep future runs moving on implementation instead of re-triage.

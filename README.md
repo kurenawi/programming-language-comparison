@@ -12,7 +12,7 @@ This repository packages the concrete comparison artifacts that were previously 
 - `tracks/c-etl`: CSV -> JSON ETL comparison for Python, TypeScript, and Go
 - `tracks/r2-optional-due-date`: API compatibility/change-impact slice with optional `due_date`
 - `tracks/r3-worker-pool`: Go baseline for worker pool + retry + timeout + partial failure
-- `tracks/r5-binary-parser`: C++ baseline for binary parsing / buffer handling
+- `tracks/r5-binary-parser`: C++ baseline plus Rust implementation for binary parsing / buffer handling
 
 ## Current interim takeaways
 
@@ -27,7 +27,8 @@ This repository packages the concrete comparison artifacts that were previously 
 
 ## Gaps still open
 
-- Rust / Elixir / Zig have not been run yet in the same tracks in this environment.
+- Elixir / Zig have not been run yet in the same tracks in this environment.
+- Rust has now been added to `tracks/r5-binary-parser`, but has not yet been propagated to the worker-pool or API-evolution tracks.
 - The final decision guide still needs the remaining languages and track-by-track adoption / rejection conditions.
 
 ## Reproducing
@@ -69,6 +70,9 @@ go run tracks/c-etl/tasks_etl.go tracks/c-etl/tasks.csv /tmp/out.json
 go run tracks/r3-worker-pool/main.go tracks/r3-worker-pool/jobs.json 4 250
 clang++ -std=c++20 -O2 -Wall -Wextra -pedantic tracks/r5-binary-parser/main.cpp -o /tmp/r5_cpp
 /tmp/r5_cpp tracks/r5-binary-parser/frames.bin
+
+. "$HOME/.cargo/env"
+cargo run --quiet --manifest-path tracks/r5-binary-parser/Cargo.toml -- tracks/r5-binary-parser/frames.bin
 ```
 
 For the TypeScript tracks, the repo now installs dependencies locally with `npm ci` and compiles with repo-local `tsc` during verification.

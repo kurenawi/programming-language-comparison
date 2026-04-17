@@ -1,0 +1,3 @@
+tracks/*/node_modules/
+tracks/*/dist/
+tracks/*/target/
