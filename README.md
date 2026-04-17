@@ -21,6 +21,7 @@ This repository packages the concrete comparison artifacts that were previously 
 - Go is strong for operationally simple CLI/API delivery and explicit worker behavior.
 - R3 and R5 now have concrete baseline tasks instead of only abstract planning.
 - A short situation-based interim guide now lives in `docs/current-decision-guide.md`.
+- Current "verified now vs still blocked" repo status lives in `docs/current-baseline-status.md`.
 
 ## Gaps still open
 
@@ -28,6 +29,12 @@ This repository packages the concrete comparison artifacts that were previously 
 - The final decision guide still needs the remaining languages and track-by-track adoption / rejection conditions.
 
 ## Reproducing
+
+Quick current-baseline verification:
+
+```bash
+./scripts/check_current_baselines.sh
+```
 
 Examples:
 
