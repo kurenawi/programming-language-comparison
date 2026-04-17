@@ -20,6 +20,7 @@ This repository packages the concrete comparison artifacts that were previously 
 - TypeScript is strongest when preserving request/response contracts while evolving APIs.
 - Go is strong for operationally simple CLI/API delivery and explicit worker behavior.
 - R3 and R5 now have concrete baseline tasks instead of only abstract planning.
+- A short situation-based interim guide now lives in `docs/current-decision-guide.md`.
 
 ## Gaps still open
 
