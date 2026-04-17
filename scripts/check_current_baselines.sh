@@ -11,7 +11,7 @@ echo "== programming-language-comparison baseline check =="
 echo "repo: $ROOT"
 
 echo
-printf '[1/4] A JSONL CLI (Python) ... '
+printf '[1/5] A JSONL CLI (Python) ... '
 A_PY_OUT="$(python3 tracks/a-jsonl-cli/tasks_cli.py tracks/a-jsonl-cli/tasks.jsonl)"
 EXPECTED_A=$'total_tasks=6\nstatus_todo=2\nstatus_in_progress=2\nstatus_done=2\npoints_high=8\npoints_medium=4\npoints_low=9'
 if [[ "$A_PY_OUT" != "$EXPECTED_A" ]]; then
@@ -22,7 +22,12 @@ fi
 echo "ok"
 
 echo
-printf '[2/4] C ETL (Python + Go) ... '
+printf '[2/5] HTTP tracks (Python + TypeScript + Go) ... '
+python3 scripts/check_http_tracks.py > "$TMP_DIR/http.log"
+echo "ok"
+
+echo
+printf '[3/5] C ETL (Python + Go) ... '
 python3 tracks/c-etl/tasks_etl.py tracks/c-etl/tasks.csv "$TMP_DIR/py.json" >/dev/null
 GO_ETL_OUT="$TMP_DIR/go.json"
 go run tracks/c-etl/tasks_etl.go tracks/c-etl/tasks.csv "$GO_ETL_OUT" >/dev/null
@@ -44,7 +49,7 @@ PY
 echo "ok"
 
 echo
-printf '[3/4] R3 worker pool (Go) ... '
+printf '[4/5] R3 worker pool (Go) ... '
 R3_OUT="$TMP_DIR/r3.json"
 go run tracks/r3-worker-pool/main.go tracks/r3-worker-pool/jobs.json 4 250 > "$R3_OUT"
 python3 - <<'PY' "$R3_OUT"
@@ -67,7 +72,7 @@ PY
 echo "ok"
 
 echo
-printf '[4/4] R5 binary parser (C++) ... '
+printf '[5/5] R5 binary parser (C++) ... '
 R5_BIN="$TMP_DIR/r5_cpp"
 clang++ -std=c++20 -O2 -Wall -Wextra -pedantic tracks/r5-binary-parser/main.cpp -o "$R5_BIN"
 R5_OUT="$TMP_DIR/r5.json"
@@ -88,4 +93,4 @@ echo "ok"
 
 echo
 echo "All checked baselines passed."
-echo "Unchecked tracks: TypeScript-based tracks still require local npm/tsc setup in this environment."
+echo "TypeScript HTTP tracks are now compiled from repo-local dependencies during verification."
