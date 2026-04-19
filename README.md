@@ -22,6 +22,8 @@ This repository packages the concrete comparison artifacts that were previously 
 - R3 and R5 now have concrete baseline tasks instead of only abstract planning.
 - A short situation-based interim guide now lives in `docs/current-decision-guide.md`.
 - A track-by-track adoption / fallback / rejection matrix now lives in `docs/track-adoption-rejection-matrix.md`.
+- A same-track worker comparison summary now lives in `docs/r3-worker-tradeoff-summary.md`.
+- A same-track low-level parser comparison summary now lives in `docs/r5-binary-parser-tradeoff-summary.md`.
 - Current "verified now vs still blocked" repo status lives in `docs/current-baseline-status.md`.
 - Toolchain readiness and the exact next comparison slice per blocked language live in `docs/toolchain-readiness-and-next-steps.md`.
 

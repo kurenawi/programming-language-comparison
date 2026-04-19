@@ -9,14 +9,14 @@ This is the current interim guide from the implemented tracks only. It is intent
 | Fast one-person automation, ETL, throwaway CLI work | Python | Fastest to start, shortest path through CSV/JSON/HTTP basics | Go | You need strict contract evolution across a team |
 | Team-owned API that will keep evolving | TypeScript | Best visibility into contract changes and optional field expansion | Go | You want zero Node/build dependency or single-binary delivery |
 | Operational CLI or API you want to ship simply | Go | Standard library coverage plus clean deployment story | Python | You mostly care about the fastest iteration loop |
-| Worker pool baseline with retry, timeout, partial failure | Go, for the current environment | Concrete baseline already implemented and runnable here | TypeScript, later Rust/Elixir for better comparison | You need language-level process isolation comparisons, which are not tested yet |
-| Low-level binary parsing baseline | C++, for the current environment | Toolchain exists now and the binary parsing baseline already runs | Rust/Zig later when toolchains exist | You want memory safety guarantees first |
+| Worker pool baseline with retry, timeout, partial failure | Go | Clearest operational baseline on the same verified worker slice | Elixir for isolation/concurrency-model comparison, Rust for safety/control comparison | The main decision is supervisor-style isolation or stronger compile-time safety rather than the simplest operational baseline |
+| Low-level binary parsing baseline | Rust | Same verified parser slice as C++, but with the stronger safety posture for new low-level work | C++ when existing native-code context or interop dominates | You must stay inside an existing C++ codebase right now or Rust adoption cost is higher than the parser risk |
 
 ## What this guide does not claim yet
 
 - It is not the final answer for Elixir, Rust, Zig, MoonBit, C, or C++ as full comparison targets.
-- R3 still needs Rust/Elixir on the same worker-pool task.
-- R5 still needs Rust/Zig on the same binary parsing task.
+- R3 still needs broader stress and scale slices beyond the current shared worker contract.
+- R5 still needs Zig on the same binary parsing task and possibly more than one parser shape.
 - The final guide still needs track-by-track rejection conditions for the added languages.
 
 ## Implemented evidence behind this interim guide
@@ -31,7 +31,7 @@ This is the current interim guide from the implemented tracks only. It is intent
 
 ## Next comparison priorities
 
-1. Add Rust to R5-1 when toolchain is available.
-2. Add Elixir to R3-1 when runtime is available.
-3. Add Rust to R3-1 or R2 once toolchain setup is solved.
-4. Convert this interim guide into the final track-by-track adoption/rejection matrix.
+1. Add Zig to R5 on the same binary-parser slice.
+2. Broaden R3 beyond contract-equivalent correctness into heavier stress slices.
+3. Add Rust to an R2 API-evolution slice.
+4. Convert the remaining interim rows into the final track-by-track adoption/rejection matrix.

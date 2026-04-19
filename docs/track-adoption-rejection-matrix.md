@@ -65,7 +65,7 @@ Do not use it yet for:
 
 ## Immediate upgrade path for this matrix
 
-1. Interpret and summarize the tradeoffs across Go, Elixir, and Rust on `tracks/r3-worker-pool`
-2. Add Zig to `tracks/r5-binary-parser`
-3. Add Rust or another later language to an R2 API-evolution slice
+1. Add Zig to `tracks/r5-binary-parser`
+2. Add Rust or another later language to an R2 API-evolution slice
+3. Broaden R3 and R5 beyond contract-equivalent correctness into heavier follow-up slices
 4. Replace the remaining speculative rows with evidence-backed rows from implemented tracks
