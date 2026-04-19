@@ -13,41 +13,29 @@ Currently available in this environment:
 
 Currently blocked:
 
-- Elixir: shim exists, but no active version is configured via mise
 - Zig: not found on PATH
 - MoonBit: not found on PATH
 
 Recently unblocked and already used:
 
-- Rust: available via `mise use -g rust@stable`, and now exercised on `tracks/r5-binary-parser`
-
-### Concrete observed blocker for Elixir
-
-`elixir --version` currently returns:
-
-```text
-mise ERROR No version is set for shim: elixir
-Set a global default version with one of the following:
-mise use -g elixir@1.19.5-otp-28
-```
-
-This means the blocker is not conceptual. It is specifically runtime/version setup.
+- Rust: available via `mise use -g rust@stable`, and now exercised on `tracks/r5-binary-parser` and `tracks/r3-worker-pool`
+- Elixir: available via `mise use -g erlang@28.4.2 elixir@1.19.5-otp-28`, and now exercised on `tracks/r3-worker-pool`
 
 ## What can move right now without new toolchains
 
 ### Safe to continue immediately
 
 - R1 / R2 / R4 hardening on Python / TypeScript / Go
-- R3 baseline iteration in Go
-- R5 baseline iteration in C++
+- R3 comparison interpretation and hardening in Go, Elixir, and Rust
+- R5 baseline iteration in Rust and C++
 - repo-level verification and decision-guide hardening
 
 ### Highest-value blocked additions
 
-1. Elixir on `tracks/r3-worker-pool`
-   - Why second: R3 already has stable input/output expectations, and Elixir is one of the main planned comparison targets for concurrency / failure isolation.
-3. Zig on `tracks/r5-binary-parser`
-   - Why third: same fixed input/output shape as Rust, but lower immediate value than Rust for the current decision backlog.
+1. Zig on `tracks/r5-binary-parser`
+   - Why next: R5 already has stable input/output expectations across C++ and Rust, and Zig is the remaining intended low-level comparison target.
+2. Rust or another later language on an R2 API-evolution slice
+   - Why next after that: Rust has moved past unblock work and now needs a second track if we want broader evidence than low-level parsing plus worker behavior.
 
 ## Exact next slice after each unblock
 
@@ -63,17 +51,17 @@ What is now true:
 - the repo can verify the Rust and C++ outputs together in `./scripts/check_current_baselines.sh`
 - the next meaningful Rust slices are no longer unblock work, but propagation into another track such as `tracks/r3-worker-pool` or a later R2 slice
 
-### If Elixir becomes available
+### Elixir is now available
 
-First target:
+Completed first target:
 
 - `tracks/r3-worker-pool`
 
-Expected output contract:
+What is now true:
 
-- same `jobs.json`
-- same summary fields as the Go baseline
-- implementation notes focused on timeout handling, retry shape, and failure isolation model
+- Elixir produces the same summary fields as the Go baseline on the same `jobs.json`
+- the repo can verify Go, Elixir, and Rust together on the worker-pool track
+- the next value from Elixir is no longer unblock work, but interpretation of the concurrency/failure tradeoffs or propagation into a new track if needed
 
 ### If Zig becomes available
 
@@ -99,7 +87,7 @@ It reports:
 
 - what is available now
 - what is blocked now
-- the first track to use once Rust / Elixir / Zig become runnable
+- the first track to use once Zig becomes runnable, plus the already-completed first targets for Rust and Elixir
 
 ## Why this doc matters
 

@@ -1,0 +1,8 @@
+[package]
+name = "r3-worker-pool"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "r3-worker-pool"
+path = "main.rs"

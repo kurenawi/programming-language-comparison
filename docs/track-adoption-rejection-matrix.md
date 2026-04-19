@@ -26,9 +26,10 @@ It is meant to answer a more practical question than raw language comparison not
 
 | Choice | Language | Why it currently earns this slot | Avoid first when |
 | -- | -- | -- | -- |
-| First pick for the current environment | Go | Concrete runnable baseline already exists, timeout/retry behavior is explicit, summary output is stable | The real decision depends on language-level process isolation or supervision features that are not compared yet |
-| Planned strong comparison targets | Elixir, Rust | Elixir should test failure isolation and concurrency model more honestly; Rust should test explicit safety/performance tradeoffs | Toolchains or runtime are not ready yet in this environment |
-| Not enough evidence yet | Python, TypeScript, C++, C, Zig, MoonBit | No same-track implementation here yet, so choosing them first would be guesswork | The track is being used only as planning, not for an evidence-backed decision |
+| First pick for the current environment | Go | It now has the clearest same-track evidence across implementation and verification, keeps timeout/retry behavior explicit, and remains the easiest operational baseline to reason about | The main decision hinges on supervision trees or process-level failure isolation more than explicit worker logic |
+| Strong comparison target with differentiated concurrency model | Elixir | It now runs on the same `jobs.json` and summary contract, so its failure-isolation and concurrency model can be judged on the same task rather than as theory | You need the most direct operationally-familiar control flow, or team/runtime familiarity with BEAM is low |
+| Strong comparison target with safety/performance posture | Rust | It now runs on the same worker-pool track and gives a real comparison point for explicit safety and control on concurrent work | The extra implementation ceremony is not justified by the actual operational needs of the worker system |
+| Not enough evidence yet | Python, TypeScript, C++, C, Zig, MoonBit | No same-track implementation here yet, so choosing them first would still be guesswork | The track is being used only as planning, not for an evidence-backed decision |
 
 ## Track R4: operational CLI or API delivery
 
@@ -64,7 +65,7 @@ Do not use it yet for:
 
 ## Immediate upgrade path for this matrix
 
-1. Add Elixir to `tracks/r3-worker-pool`
-2. Add Rust to `tracks/r3-worker-pool` or an adjacent R2 slice
-3. Add Zig to `tracks/r5-binary-parser`
-4. Replace the remaining "planned comparison target" rows with evidence-backed rows from implemented tracks
+1. Interpret and summarize the tradeoffs across Go, Elixir, and Rust on `tracks/r3-worker-pool`
+2. Add Zig to `tracks/r5-binary-parser`
+3. Add Rust or another later language to an R2 API-evolution slice
+4. Replace the remaining speculative rows with evidence-backed rows from implemented tracks

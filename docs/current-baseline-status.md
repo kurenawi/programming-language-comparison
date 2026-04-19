@@ -23,13 +23,14 @@
   - Go
 - `r3-worker-pool`
   - Go
+  - Elixir
+  - Rust
 - `r5-binary-parser`
   - C++
   - Rust
 
 ## Present but not auto-checked yet
 
-- Elixir tracks, blocked by runtime/version setup in the current environment
 - Zig tracks, blocked by missing toolchain in the current environment
 - MoonBit tracks, blocked by missing toolchain in the current environment
 
@@ -48,5 +49,5 @@ That command now covers:
 - HTTP change-impact
 - HTTP optional-field compatibility
 - ETL
-- worker-pool baseline
+- worker-pool baseline (Go + Elixir + Rust)
 - binary-parser baseline (C++ + Rust)

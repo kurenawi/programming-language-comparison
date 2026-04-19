@@ -74,12 +74,18 @@ INNERPY
 echo "ok"
 
 echo
-printf '[4/5] R3 worker pool (Go + Elixir) ... '
+printf '[4/5] R3 worker pool (Go + Elixir + Rust) ... '
 R3_GO_OUT="$TMP_DIR/r3_go.json"
 go run tracks/r3-worker-pool/main.go tracks/r3-worker-pool/jobs.json 4 250 > "$R3_GO_OUT"
 R3_EX_OUT="$TMP_DIR/r3_ex.json"
 elixir tracks/r3-worker-pool/main.exs tracks/r3-worker-pool/jobs.json 4 250 > "$R3_EX_OUT"
-python3 - <<'INNERPY' "$R3_GO_OUT" "$R3_EX_OUT"
+if [[ -f "$HOME/.cargo/env" ]]; then
+  # shellcheck disable=SC1090
+  . "$HOME/.cargo/env"
+fi
+R3_RUST_OUT="$TMP_DIR/r3_rust.json"
+cargo run --quiet --manifest-path tracks/r3-worker-pool/Cargo.toml -- tracks/r3-worker-pool/jobs.json 4 250 > "$R3_RUST_OUT"
+python3 - <<'INNERPY' "$R3_GO_OUT" "$R3_EX_OUT" "$R3_RUST_OUT"
 import json, sys
 expected = {
     "total_jobs": 7,
@@ -130,5 +136,5 @@ echo "ok"
 echo
 echo "All checked baselines passed."
 echo "TypeScript HTTP, CLI, and ETL tracks are now compiled from repo-local dependencies during verification."
-echo "R3 now verifies both the original Go baseline and the new Elixir implementation against the same jobs input."
+echo "R3 now verifies Go, Elixir, and Rust against the same jobs input."
 echo "R5 now verifies both the original C++ baseline and the new Rust implementation against the same binary input."

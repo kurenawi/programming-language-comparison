@@ -11,7 +11,7 @@ This repository packages the concrete comparison artifacts that were previously 
 - `tracks/b1-change-impact`: change-impact version of the HTTP API (`blocked` status + filter)
 - `tracks/c-etl`: CSV -> JSON ETL comparison for Python, TypeScript, and Go
 - `tracks/r2-optional-due-date`: API compatibility/change-impact slice with optional `due_date`
-- `tracks/r3-worker-pool`: Go baseline plus Elixir implementation for worker pool + retry + timeout + partial failure
+- `tracks/r3-worker-pool`: Go baseline plus Elixir and Rust implementations for worker pool + retry + timeout + partial failure
 - `tracks/r5-binary-parser`: C++ baseline plus Rust implementation for binary parsing / buffer handling
 
 ## Current interim takeaways
@@ -28,8 +28,8 @@ This repository packages the concrete comparison artifacts that were previously 
 ## Gaps still open
 
 - Zig has not been run yet in the same tracks in this environment.
-- Rust has now been added to `tracks/r5-binary-parser`, but has not yet been propagated to the worker-pool or API-evolution tracks.
-- Elixir has now been added to `tracks/r3-worker-pool`, but it has not yet been compared against Rust on the same worker track.
+- Rust has now been added to both `tracks/r5-binary-parser` and `tracks/r3-worker-pool`, but has not yet been propagated to the API-evolution tracks.
+- Elixir now shares the same worker-pool track with both Go and Rust, but broader multi-track evidence is still missing.
 - The final decision guide still needs the remaining languages and track-by-track adoption / rejection conditions.
 
 ## Reproducing
@@ -70,6 +70,7 @@ go run tracks/c-etl/tasks_etl.go tracks/c-etl/tasks.csv /tmp/out.json
 
 go run tracks/r3-worker-pool/main.go tracks/r3-worker-pool/jobs.json 4 250
 elixir tracks/r3-worker-pool/main.exs tracks/r3-worker-pool/jobs.json 4 250
+cargo run --quiet --manifest-path tracks/r3-worker-pool/Cargo.toml -- tracks/r3-worker-pool/jobs.json 4 250
 clang++ -std=c++20 -O2 -Wall -Wextra -pedantic tracks/r5-binary-parser/main.cpp -o /tmp/r5_cpp
 /tmp/r5_cpp tracks/r5-binary-parser/frames.bin
 
