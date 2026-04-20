@@ -10,7 +10,7 @@ This repository packages the concrete comparison artifacts that were previously 
 - `tracks/b-http-api`: minimal HTTP API comparison for Python, TypeScript, and Go
 - `tracks/b1-change-impact`: change-impact version of the HTTP API (`blocked` status + filter)
 - `tracks/c-etl`: CSV -> JSON ETL comparison for Python, TypeScript, and Go
-- `tracks/r2-optional-due-date`: API compatibility/change-impact slice with optional `due_date`
+- `tracks/r2-optional-due-date`: API compatibility/change-impact slice with optional `due_date` for Python, TypeScript, Go, and Rust
 - `tracks/r3-worker-pool`: Go baseline plus Elixir and Rust implementations for worker pool + retry + timeout + partial failure
 - `tracks/r5-binary-parser`: C++ baseline plus Rust implementation for binary parsing / buffer handling
 
@@ -18,6 +18,7 @@ This repository packages the concrete comparison artifacts that were previously 
 
 - Python is the fastest starting point for one-off automation, CLI tasks, and ETL.
 - TypeScript is strongest when preserving request/response contracts while evolving APIs.
+- Rust now also shares the same R2 optional-field slice, so API-evolution comparisons are no longer limited to Python, TypeScript, and Go.
 - Go is strong for operationally simple CLI/API delivery and explicit worker behavior.
 - R3 and R5 now have concrete baseline tasks instead of only abstract planning.
 - A short situation-based interim guide now lives in `docs/current-decision-guide.md`.
@@ -30,7 +31,7 @@ This repository packages the concrete comparison artifacts that were previously 
 ## Gaps still open
 
 - Zig has not been run yet in the same tracks in this environment.
-- Rust has now been added to both `tracks/r5-binary-parser` and `tracks/r3-worker-pool`, but has not yet been propagated to the API-evolution tracks.
+- Rust has now been added to `tracks/r2-optional-due-date`, `tracks/r3-worker-pool`, and `tracks/r5-binary-parser`, but broader multi-slice API-evolution evidence is still missing.
 - Elixir now shares the same worker-pool track with both Go and Rust, but broader multi-track evidence is still missing.
 - The final decision guide still needs the remaining languages and track-by-track adoption / rejection conditions.
 

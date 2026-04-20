@@ -21,6 +21,7 @@
   - Python
   - TypeScript
   - Go
+  - Rust
 - `r3-worker-pool`
   - Go
   - Elixir

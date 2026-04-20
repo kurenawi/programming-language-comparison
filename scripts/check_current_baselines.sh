@@ -47,7 +47,7 @@ fi
 echo "ok"
 
 echo
-printf '[2/5] HTTP tracks (Python + TypeScript + Go) ... '
+printf '[2/5] HTTP tracks (Python + TypeScript + Go, plus Rust on R2) ... '
 python3 scripts/check_http_tracks.py > "$TMP_DIR/http.log"
 echo "ok"
 
@@ -136,5 +136,6 @@ echo "ok"
 echo
 echo "All checked baselines passed."
 echo "TypeScript HTTP, CLI, and ETL tracks are now compiled from repo-local dependencies during verification."
+echo "R2 now verifies Python, TypeScript, Go, and Rust against the same optional-field API slice."
 echo "R3 now verifies Go, Elixir, and Rust against the same jobs input."
 echo "R5 now verifies both the original C++ baseline and the new Rust implementation against the same binary input."

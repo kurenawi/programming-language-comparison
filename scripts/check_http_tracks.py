@@ -139,6 +139,19 @@ TRACKS = [
                     ("GET", "/summary", None, 200, {"total_tasks": 4, "overdue_tasks": 1, "status_todo": 1, "status_in_progress": 1, "status_done": 1, "status_blocked": 1, "points_high": 5, "points_medium": 2, "points_low": 5}),
                 ],
             },
+            {
+                "name": "Rust",
+                "port": 8124,
+                "start": ["cargo", "run", "--quiet"],
+                "cwd": ROOT / "tracks" / "r2-optional-due-date",
+                "checks": [
+                    ("GET", "/summary", None, 200, {"total_tasks": 3, "overdue_tasks": 1, "status_todo": 1, "status_in_progress": 1, "status_done": 1, "status_blocked": 0, "points_high": 3, "points_medium": 2, "points_low": 5}),
+                    ("GET", "/tasks", None, 200, {"tasks": [{"id": 1, "title": "draft spec", "status": "todo", "priority": "high", "estimate": 3, "due_date": "2026-04-10"}, {"id": 2, "title": "implement API", "status": "in_progress", "priority": "medium", "estimate": 2}, {"id": 3, "title": "ship release", "status": "done", "priority": "low", "estimate": 5, "due_date": "2026-04-15"}]}),
+                    ("POST", "/tasks", {"title": "follow up vendor", "status": "blocked", "priority": "high", "estimate": 2, "due_date": "2026-04-20"}, 201, {"id": 4, "title": "follow up vendor", "status": "blocked", "priority": "high", "estimate": 2, "due_date": "2026-04-20"}),
+                    ("POST", "/tasks", {"title": "bad due date", "status": "todo", "priority": "high", "estimate": 1, "due_date": "2026/04/20"}, 400, {"error": "validation_error", "details": ["due_date must be YYYY-MM-DD"]}),
+                    ("GET", "/summary", None, 200, {"total_tasks": 4, "overdue_tasks": 1, "status_todo": 1, "status_in_progress": 1, "status_done": 1, "status_blocked": 1, "points_high": 5, "points_medium": 2, "points_low": 5}),
+                ],
+            },
         ],
     },
 ]

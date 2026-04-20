@@ -20,6 +20,7 @@ It is meant to answer a more practical question than raw language comparison not
 | -- | -- | -- | -- |
 | First pick | TypeScript | Best visibility into request/response contract changes, optional field expansion, and API-shape maintenance | You need single-binary delivery, zero Node/build dependency, or the runtime environment is tightly constrained |
 | Strong fallback | Go | Explicit structs and optional handling make backward-compatibility changes readable and operationally stable | You want the strongest type-guided contract editing loop and fastest schema-surface discovery |
+| Strong comparison target with safety/control posture | Rust | Rust now shares the same optional-field API slice, so contract evolution can be judged not only on explicitness but also on stronger compile-time safety posture | The extra implementation ceremony is not justified by the actual API-maintenance problem, or the team needs the fastest contract-editing loop first |
 | Not first for this track | Python | Still fast to change, but contract and validation boundaries stay more human-dependent in the current slices | Speed of prototyping matters more than sustained contract safety |
 
 ## Track R3: worker pool, retry, timeout, partial failure
